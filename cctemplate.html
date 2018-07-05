@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>jQuery addClass example</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<script
+type="text/javascript"
+src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"
+></script>
+
+<link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<style type="text/css">
+@import url('https://fonts.googleapis.com/css?family=PT+Mono&subset=cyrillic,cyrillic-ext,latin-ext');
+
+#cccontainerdiv
+{
+width:500px;
+height:300px;
+position:relative;
+font-weight:bold;
+font-size:2rem;
+text-shadow:1px 1px #00000066, -2px -2px #ffffff66;
+transform: perspective(1500px);
+perspective: 900px;
+perspective-origin:250px;
+font-family: 'PT Mono', monospace;
+margin:auto;
+margin-top:20px;
+
+}
+#cccontainerdiv .kartica
+{
+border-radius:30px;
+display:block;
+background:#ccc;
+position:absolute;
+top:0;left:0;right:0;bottom:0;
+transform:rotateY(0deg) perspective(1500px);
+transition:all .5s;
+backface-visibility: visible;
+z-index:1;
+    
+     -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.paymentform
+{
+max-width:450px;
+}
+
+#cccontainerdiv .kartica .prednjastrana, #cccontainerdiv .kartica .zadnjastrana
+{
+position:absolute;
+top:0;left:0;right:0;bottom:0;
+/*backface-visibility: hidden;*/
+background:url(img/nocard.png);;
+transform: translateZ(-1px) perspective(1500px);
+z-index:2;
+transition:all .5s;
+border-radius:30px;
+box-shadow:-1px -1px 1px rgba(0,0,0,.2) inset, 1px 1px 1px rgba(255,255,255,.7) inset;
+    overflow:hidden;
+}
+
+#cccontainerdiv .kartica .zadnjastrana
+{
+transform:rotateY(180deg) perspective(1500px);
+background:#ccc;
+z-index:0;
+}
+
+#cccontainerdiv .kartica.okrenuta
+{
+transform:rotateY(180deg) perspective(500px);
+}
+
+#cccontainerdiv .kartica.okrenuta .zadnjastrana
+{
+z-index:1;
+}
+#cccontainerdiv .kartica.okrenuta .prednjastrana
+{
+z-index:0;
+}
+
+.neupisano
+{
+color:#888!important;
+opacity:.6;
+}
+    
+.upisano
+{
+color:#888!important;
+opacity:1;
+}
+    
+.visa .upisano
+{
+color: #ffeb9d!important;  
+    opacity:.7;
+}
+    
+.mastercard .upisano
+{
+color: #ffffff!important;  
+    opacity:.8;
+}
+
+#cccontainerdiv .kartica .ime
+{
+position:absolute;
+bottom:4%;
+left:7%;
+font-size:80%;
+text-transform:uppercase;
+}
+
+#cccontainerdiv .kartica .brojevi
+{
+position:absolute;
+bottom:28%;
+left:7%;
+}
+
+#cccontainerdiv .kartica .datum
+{
+position:absolute;
+bottom:17%;
+left:37%;
+font-size:80%;
+}
+
+#cccontainerdiv .kartica .datum::before
+{
+position:absolute;
+content:"VALID THRU";
+font-size:40%;
+top:4px;
+width:60px;
+overflow:hidden;
+left:-65px;
+font-weight:bold;
+text-align:right;
+}
+@keyframes SIJENKA
+{
+0% {opacity:1}
+
+50% {opacity:0; transform:translateY(-15px)}
+100% {opacity:1}
+}
+@keyframes SIJENKA2
+{
+0% {opacity:1}
+
+50% {opacity:0; transform:translateY(-15px)}
+100% {opacity:1}
+}
+
+
+
+#cccontainerdiv .kartica::after
+{
+content:" ";
+display:block;
+position:absolute;
+bottom:-8px;
+background:#ccc;
+height:10px;
+width:100%;
+filter:blur(8px);
+z-index:0;
+animation:SIJENKA .4s ease-in-out;
+transform:scale(.9,1)
+
+}
+
+#cccontainerdiv .kartica.okrenuta::after
+{
+animation:SIJENKA2 .4s ease-in-out;
+}
+
+#cccontainerdiv .kartica .zadnjastrana::after
+{
+position:absolute;
+top:10%;
+left:0;
+right:0;
+height:20%;
+background:#444;;
+content:"";
+}
+    
+#cccontainerdiv .kartica .prednjastrana::before,    #cccontainerdiv .kartica .zadnjastrana::before
+{
+    position:absolute;
+    display:block;
+    z-index:10;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-image:url(img/cardoverlay.png);
+    background-size: cover;
+    content:" ";
+    opacity:.5;
+   
+}
+
+#cccontainerdiv .kartica .zadnjastrana .cvc
+{
+background:white;
+position:absolute;
+top:40%;
+left:5%;
+text-align:right;
+width:65%;
+padding:10px;
+font-size:70%;
+font-family:arial, helvetica, sans-serif;
+font-style:italic;
+font-weight:300;
+}
+
+.form-control-half
+{
+max-width:45%;
+display:inline-block;
+}
+
+.inputform
+{
+max-width:500px!important;
+margin-top:24px;
+}
+.separatorslash
+{
+font-size:20px;
+color:#888;
+}
+
+.inputform .input
+{
+margin-bottom:15px;
+}
+
+#cccontainerdiv .shining
+{
+
+}
+    
+    .prednjastrana .mastercard, .prednjastrana .visa
+    {
+        position:absolute;
+        background:url(img/master.png);
+        top:0;
+        right:0;
+        bottom:0;
+        width:0%;
+        background-position:top left;
+        background-size: cover;
+        transition: all .5s ease-in-out;
+    }
+    .prednjastrana .visa
+    {
+        background-image:url(img/visa.png);
+    }
+    
+    .mastercard .prednjastrana .mastercard
+    {
+        width:100%;
+    }
+    
+     .visa .prednjastrana .visa
+    {
+        width:100%;
+    }
+    
+    #cccontainerdiv .kartica.visa .zadnjastrana
+    {
+        background-color:#4093f3;
+    }
+    #cccontainerdiv .kartica.mastercard .zadnjastrana
+    {
+        background-color:#657d9a;
+    }
+    
+    
+
+    .shining
+    {
+       
+        text-decoration:underline;
+        text-decoration-style: dashed;
+         text-decoration-color: #cf2424;
+    }
+</style>
+<!-- TODO: Missing CoffeeScript 2 -->
+
+<script type="text/javascript">
+
+
+
+</script>
+
+</head>
+<body>
+<div id="cccontainerdiv">
+<div class="kartica">
+<div class="prednjastrana">
+    <div class="mastercard"></div>
+    <div class="visa"></div>
+<div class="pozadina">
+</div>
+<div class="brojevi neupisano">
+XXXX XXXX XXXX XXXX
+</div>
+<div class="datum neupisano">
+XX/XX
+</div>
+<div class="ime neupisano">
+Ime Prezime
+</div>
+<div class="">
+</div>
+</div>
+<div class="zadnjastrana">
+
+<div class="cvc">
+XXX
+</div>
+</div>
+</div>
+</div>
+
+<div class="container inputform">
+<div class="row">
+<div class="col-12 col-sm-6 col-xs-12">
+<label for="ime">Ime na kartici:</label>
+<input class="input form-control prvastrana" id="ime" placeholder="Ime prezime"/>
+</div>
+<div class="col-12 col-sm-6 col-xs-12">
+<label for="brojkartice">Broj kartice:</label>
+<input class="input form-control prvastrana" id="brojkartice" maxlength="19" placeholder="Broj kartice"/>
+</div>
+<div class="col-12 col-sm-6 col-xs-12">
+<label for="datumisteka">Datum isteka:</label><br>
+<input class="input form-control form-control-half prvastrana" id="mjesecisteka" maxlength="2" placeholder="MM"/> <span class="separatorslash">/</span>
+<input class="input form-control form-control-half prvastrana" id="godinaisteka" maxlength="2" placeholder="YY"/>
+</div>
+<div class="col-12 col-sm-6 col-xs-12">
+<label for="cvc">CVC kod:</label><br>
+<input class="input form-control drugastrana" maxlength="3" id="CVC" placeholder="CVC"/>
+</div>
+<div class="col-12">
+<button class="btn btn-lg btn-block btn-success">
+Plati €11.99
+</button>
+</div>
+</div>
+
+<form>
+
+
+</form>
+<script>
+
+
+jQuery(".kartica").mousedown(function(){jQuery(this).toggleClass("okrenuta")})
+
+jQuery(".drugastrana").focus(function(){jQuery(".kartica").addClass("okrenuta")});
+jQuery(".prvastrana").focus(function(){jQuery(".kartica").removeClass("okrenuta")});
+
+jQuery("input").keyup(function(){
+jQuery(this).change();
+});
+    
+    
+    
+$('#brojkartice').on('keypress change blur', function () {
+$(this).val(function (index, value) {
+return value.replace(/[^a-z0-9]+/gi, '').replace(/(.{4})/g, '$1 ').replace(/^\s+|\s+$/g,'');
+});
+});
+    
+    
+    
+jQuery("#brojkartice").change(function(){
+var v=""
+jQuery("#cccontainerdiv .kartica .brojevi").html(jQuery(this).val()).removeClass("neupisano").addClass("upisano");
+    if (jQuery(this).val()==""){
+        jQuery("#cccontainerdiv .kartica .brojevi").html("XXXX XXXX XXXX XXXX").addClass("neupisano").removeClass("upisano");
+          jQuery(".kartica").removeClass("mastercard").removeClass("visa");
+    }
+    else if (jQuery(this).val().charAt(0)==("4")){
+        //visa
+        jQuery(".kartica").removeClass("mastercard").addClass("visa");
+    }
+    else if (jQuery(this).val().charAt(0)==("5")||jQuery(this).val().charAt(0)==("6")){
+        //visa
+        jQuery(".kartica").addClass("mastercard").removeClass("visa");
+    }
+    else {
+        //visa
+        jQuery(".kartica").removeClass("mastercard").removeClass("visa");
+    }
+});
+
+
+jQuery("#ime").change(function(){
+if(jQuery(this).val()=="") jQuery("#cccontainerdiv .kartica .ime").html("IME PREZIME").addClass("neupisano").removeClass("upisano");
+    else jQuery("#cccontainerdiv .kartica .ime").html(jQuery(this).val()).removeClass("neupisano").addClass("upisano");
+});
+
+jQuery("#CVC").change(function(){
+var v1=jQuery(this).val();
+if (v1==""||v1==" ") v1="XXX";
+jQuery("#cccontainerdiv .kartica .cvc").html(v1);
+if (v1=="XXX") jQuery("#cccontainerdiv .kartica .cvc");
+});
+
+
+jQuery("#mjesecisteka, #godinaisteka").change(function(){
+var v1=jQuery("#mjesecisteka").val();
+var v2=jQuery("#godinaisteka").val();
+if (v1=="") v1="XX";
+if (v2=="") v2="XX";
+   
+jQuery("#cccontainerdiv .kartica .datum").html(v1+"/"+v2).removeClass("neupisano").addClass("upisano");
+    if(v1=="XX"&&v2=="XX") jQuery("#cccontainerdiv .kartica .datum").addClass("neupisano").removeClass("upisano");
+    
+});
+
+
+    
+    
+    
+jQuery("#ime").focus(function(){
+     jQuery("#cccontainerdiv .kartica .ime").addClass("shining");
+});
+jQuery("#ime").blur(function(){
+     jQuery("#cccontainerdiv .kartica .ime").removeClass("shining");
+});
+    
+jQuery("#brojkartice").focus(function(){
+     jQuery("#cccontainerdiv .kartica .brojevi").addClass("shining");
+});
+jQuery("#brojkartice").blur(function(){
+     jQuery("#cccontainerdiv .kartica .brojevi").removeClass("shining");
+});
+    
+jQuery("#ime").focus(function(){
+     jQuery("#cccontainerdiv .kartica .ime").addClass("shining");
+});
+jQuery("#ime").blur(function(){
+     jQuery("#cccontainerdiv .kartica .ime").removeClass("shining");
+});
+    
+jQuery("#CVC").focus(function(){
+     jQuery("#cccontainerdiv .kartica .cvc").addClass("shining");
+});
+jQuery("#CVC").blur(function(){
+     jQuery("#cccontainerdiv .kartica .cvc").removeClass("shining");
+   setTimeout(function(){ jQuery(".kartica").removeClass("okrenuta");},17);
+});    
+    
+jQuery("#mjesecisteka, #godinaisteka").focus(function(){
+    setTimeout(function(){ jQuery("#cccontainerdiv .kartica .datum").addClass("shining");},100);
+});
+jQuery("#mjesecisteka, #godinaisteka").blur(function(){
+     jQuery("#cccontainerdiv .kartica .datum").removeClass("shining");
+});</script>
+</body>
+</html>
