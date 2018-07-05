@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>jQuery addClass example</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=PT+Mono&subset=cyrillic,cyrillic-ext,latin-ext');
+
+        #cccontainerdiv {
+            width: 500px;
+            height: 300px;
+            position: relative;
+            font-weight: bold;
+            font-size: 2rem;
+            text-shadow: 1px 1px #00000066, -2px -2px #ffffff66;
+            transform: perspective(1500px);
+            perspective: 900px;
+            perspective-origin: 250px;
+            font-family: 'PT Mono', monospace;
+            margin: auto;
+            margin-top: 20px;
+
+        }
+
+        .paymentform {
+            max-width: 450px;
+        }
+    </style>
+
+
+
+
+</head>
+
+<body>
+    <div id="cccontainerdiv">
+        <div class="kartica">
+            <div class="prednjastrana">
+                <div class="mastercard"></div>
+                <div class="visa"></div>
+                <div class="pozadina">
+                </div>
+                <div class="brojevi neupisano">
+                    XXXX XXXX XXXX XXXX
+                </div>
+                <div class="datum neupisano">
+                    XX/XX
+                </div>
+                <div class="ime neupisano">
+                    Ime Prezime
+                </div>
+                <div class="">
+                </div>
+            </div>
+            <div class="zadnjastrana">
+
+                <div class="cvc">
+                    XXX
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container inputform">
+        <div class="row">
+            <div class="col-12 col-sm-6 col-xs-12">
+                <label for="ime">Ime na kartici:</label>
+                <input class="input form-control prvastrana" id="ime" placeholder="Ime prezime" />
+            </div>
+            <div class="col-12 col-sm-6 col-xs-12">
+                <label for="brojkartice">Broj kartice:</label>
+                <input class="input form-control prvastrana" id="brojkartice" maxlength="19" placeholder="Broj kartice" />
+            </div>
+            <div class="col-12 col-sm-6 col-xs-12">
+                <label for="datumisteka">Datum isteka:</label><br>
+                <input class="input form-control form-control-half prvastrana" id="mjesecisteka" maxlength="2" placeholder="MM" /> <span class="separatorslash">/</span>
+                <input class="input form-control form-control-half prvastrana" id="godinaisteka" maxlength="2" placeholder="YY" />
+            </div>
+            <div class="col-12 col-sm-6 col-xs-12">
+                <label for="cvc">CVC kod:</label><br>
+                <input class="input form-control drugastrana" maxlength="3" id="CVC" placeholder="CVC" />
+            </div>
+            <div class="col-12">
+                <button class="btn btn-lg btn-block btn-success">
+Plati €11.99
+</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>
